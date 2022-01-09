@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Vanilla Shears",
-  "description": "More shears variant for every tool material",
+  "description": "More shears variant based on vanilla tool material",
   "authors": [
     "Apis035"
   ],
@@ -13,7 +13,7 @@
     "sources": "https://github.com/apis035/vanilla-shears"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/vanillashears/icon.png",
 
   "environment": "*",

@@ -1,3 +1,3 @@
 # Vanilla Shears
 
-Minecraft fabric mod adding more shears tool based on vanilla tool materials
+A Minecraft fabric mod adding more shears based on vanilla tool materials
