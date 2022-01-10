@@ -38,6 +38,8 @@ public class VanillaShears implements ModInitializer {
         register("diamond_shears", DIAMOND_SHEARS);
         register("netherite_shears", NETHERITE_SHEARS);
 
+        //Add loot table to these blocks when destroyed using custom shears
+        //TODO: Find a better way to do this
         Block[] drops = {
                 Blocks.OAK_LEAVES, Blocks.SPRUCE_LEAVES, Blocks.BIRCH_LEAVES,
                 Blocks.JUNGLE_LEAVES, Blocks.ACACIA_LEAVES, Blocks.DARK_OAK_LEAVES,

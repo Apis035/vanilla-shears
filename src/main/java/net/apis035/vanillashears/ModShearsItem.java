@@ -19,6 +19,7 @@ public class ModShearsItem extends ShearsItem {
         if (entity.world.isClient)
             return ActionResult.PASS;
 
+        //Shearing sheep
         if (entity instanceof SheepEntity sheepEntity) {
             if (sheepEntity.isShearable()) {
                 sheepEntity.sheared(SoundCategory.PLAYERS);
