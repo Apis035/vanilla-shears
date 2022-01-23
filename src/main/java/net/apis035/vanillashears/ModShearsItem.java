@@ -9,6 +9,24 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.event.GameEvent;
 
+/*
+ * TODO:
+ *  + Cobweb
+ *  + Dead bush
+ *  + Fern
+ *  + Grass
+ *  + Nether sprouts
+ *  + Leaves
+ *  + Vines
+ *  + Hanging roots
+ *  + Wool
+ *  - Shearing tripwire (doesn't trigger redstone signal)
+ *  - Shearing mooshroom (drop 5 mushroom, mooshroom -> cow)
+ *  - Shearing pumpkin (pumpkin -> carved pumpkin)
+ *  - Shearing beehive (beehive lv.5 drop 3 honeycombs)
+ *  - Shearing snow golem (remove pumpkin head)
+ */
+
 public class ModShearsItem extends ShearsItem {
     public ModShearsItem(Settings settings, ToolMaterials material) {
         super(settings.group(ItemGroup.TOOLS).maxDamage(material.getDurability()-12));
@@ -19,7 +37,7 @@ public class ModShearsItem extends ShearsItem {
         if (entity.world.isClient)
             return ActionResult.PASS;
 
-        //Shearing sheep
+        // Shearing sheep
         if (entity instanceof SheepEntity sheepEntity) {
             if (sheepEntity.isShearable()) {
                 sheepEntity.sheared(SoundCategory.PLAYERS);

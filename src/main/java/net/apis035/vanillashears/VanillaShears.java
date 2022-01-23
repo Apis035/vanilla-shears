@@ -1,16 +1,8 @@
 package net.apis035.vanillashears;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
-import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.tag.TagFactory;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.*;
-import net.minecraft.loot.condition.MatchToolLootCondition;
-import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
-import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -37,25 +29,5 @@ public class VanillaShears implements ModInitializer {
         register("golden_shears", GOLDEN_SHEARS);
         register("diamond_shears", DIAMOND_SHEARS);
         register("netherite_shears", NETHERITE_SHEARS);
-
-        //Add loot table to these blocks when destroyed using custom shears
-        //TODO: Find a better way to do this
-        Block[] drops = {
-                Blocks.OAK_LEAVES, Blocks.SPRUCE_LEAVES, Blocks.BIRCH_LEAVES,
-                Blocks.JUNGLE_LEAVES, Blocks.ACACIA_LEAVES, Blocks.DARK_OAK_LEAVES,
-                Blocks.AZALEA_LEAVES, Blocks.FLOWERING_AZALEA_LEAVES};
-
-        for (Block drop : drops) {
-            FabricLootPoolBuilder pool = FabricLootPoolBuilder.builder()
-                    .rolls(ConstantLootNumberProvider.create(1))
-                    .with(ItemEntry.builder(drop))
-                    .withCondition(new MatchToolLootCondition(ItemPredicate.Builder.create().tag(SHEARS).build()));
-
-            LootTableLoadingCallback.EVENT.register((resourceManager, manager, id, supplier, setter) -> {
-                if (drop.getLootTableId().equals(id)) {
-                    supplier.pool(pool);
-                }
-            });
-        }
     }
 }
