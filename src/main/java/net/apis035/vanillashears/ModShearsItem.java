@@ -11,15 +11,6 @@ import net.minecraft.world.event.GameEvent;
 
 /*
  * TODO:
- *  + Cobweb
- *  + Dead bush
- *  + Fern
- *  + Grass
- *  + Nether sprouts
- *  + Leaves
- *  + Vines
- *  + Hanging roots
- *  + Wool
  *  - Shearing tripwire (doesn't trigger redstone signal)
  *  - Shearing mooshroom (drop 5 mushroom, mooshroom -> cow)
  *  - Shearing pumpkin (pumpkin -> carved pumpkin)
