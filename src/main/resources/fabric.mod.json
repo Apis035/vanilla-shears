@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Vanilla Shears",
-  "description": "More shears for vanilla tool material",
+  "description": "More shears for each vanilla tool material",
   "authors": [
     "Apis035"
   ],
