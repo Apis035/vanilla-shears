@@ -2,6 +2,7 @@ package net.apis035.vanillashears;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.tag.TagFactory;
+import net.minecraft.block.Block;
 import net.minecraft.item.*;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
@@ -16,7 +17,7 @@ public class VanillaShears implements ModInitializer {
     public static final Item DIAMOND_SHEARS = new ModShearsItem(new Item.Settings(), ToolMaterials.DIAMOND);
     public static final Item NETHERITE_SHEARS = new ModShearsItem(new Item.Settings(), ToolMaterials.NETHERITE);
 
-    public static final Tag<Item> SHEARS = TagFactory.ITEM.create(new Identifier("c", "shears"));
+    public static final Tag<Block> SHEARABLE = TagFactory.BLOCK.create(new Identifier("vanillashears", "shearable"));
 
     public static void register(String id, Item item) {
         Registry.register(Registry.ITEM, new Identifier(MOD_ID, id), item);

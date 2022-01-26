@@ -1,5 +1,7 @@
 package net.apis035.vanillashears;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -7,20 +9,23 @@ import net.minecraft.item.*;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
 /*
  * TODO:
- *  - Shearing tripwire (doesn't trigger redstone signal)
- *  - Shearing mooshroom (drop 5 mushroom, mooshroom -> cow)
- *  - Shearing pumpkin (pumpkin -> carved pumpkin)
- *  - Shearing beehive (beehive lv.5 drop 3 honeycombs)
- *  - Shearing snow golem (remove pumpkin head)
+ *  Don't drop block's loot_table items when sheared
+ *  Shearing tripwire (doesn't trigger redstone signal)
+ *  Shearing mooshroom (drop 5 mushroom, mooshroom -> cow)
+ *  Shearing pumpkin (pumpkin -> carved pumpkin)
+ *  Shearing beehive (beehive lv.5 drop 3 honeycombs)
+ *  Shearing snow golem (remove pumpkin head)
  */
 
 public class ModShearsItem extends ShearsItem {
     public ModShearsItem(Settings settings, ToolMaterials material) {
-        super(settings.group(ItemGroup.TOOLS).maxDamage(material.getDurability()-12));
+        super(settings.group(ItemGroup.TOOLS).maxDamage(material.getDurability() - 12));
     }
 
     @Override
@@ -40,5 +45,18 @@ public class ModShearsItem extends ShearsItem {
             }
         }
         return ActionResult.PASS;
+    }
+
+    @Override
+    public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
+        if (!world.isClient) {
+            if (state.isIn(VanillaShears.SHEARABLE)) {
+                ItemEntity drop = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), state.getBlock().asItem().getDefaultStack());
+                drop.setToDefaultPickupDelay();
+                world.spawnEntity(drop);
+            }
+        }
+
+        return super.postMine(stack, world, state, pos, miner);
     }
 }

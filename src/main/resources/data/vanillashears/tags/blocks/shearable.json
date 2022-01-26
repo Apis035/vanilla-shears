@@ -1,0 +1,28 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:grass",
+    "minecraft:tall_grass",
+    "minecraft:seagrass",
+    "minecraft:tall_seagrass",
+    "minecraft:vine",
+    "minecraft:weeping_vines",
+    "minecraft:weeping_vines_plant",
+    "minecraft:twisting_vines",
+    "minecraft:twisting_vines_plant",
+    "minecraft:cobweb",
+    "minecraft:dead_bush",
+    "minecraft:fern",
+    "minecraft:large_fern",
+    "minecraft:nether_sprouts",
+    "minecraft:hanging_roots",
+    "minecraft:acacia_leaves",
+    "minecraft:azalea_leaves",
+    "minecraft:flowering_azalea_leaves",
+    "minecraft:birch_leaves",
+    "minecraft:dark_oak_leaves",
+    "minecraft:jungle_leaves",
+    "minecraft:oak_leaves",
+    "minecraft:spruce_leaves"
+  ]
+}
