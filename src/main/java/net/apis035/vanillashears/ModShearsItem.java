@@ -3,7 +3,9 @@ package net.apis035.vanillashears;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.sound.SoundCategory;
@@ -17,10 +19,8 @@ import net.minecraft.world.event.GameEvent;
  * TODO:
  *  Don't drop block's loot_table items when sheared
  *  Shearing tripwire (doesn't trigger redstone signal)
- *  Shearing mooshroom (drop 5 mushroom, mooshroom -> cow)
  *  Shearing pumpkin (pumpkin -> carved pumpkin)
  *  Shearing beehive (beehive lv.5 drop 3 honeycombs)
- *  Shearing snow golem (remove pumpkin head)
  */
 
 public class ModShearsItem extends ShearsItem {
@@ -40,8 +40,26 @@ public class ModShearsItem extends ShearsItem {
                 sheepEntity.emitGameEvent(GameEvent.SHEAR, user);
                 stack.damage(1, user, (p) -> p.sendToolBreakStatus(hand));
                 return ActionResult.SUCCESS;
-            } else {
-                return ActionResult.CONSUME;
+            }
+        }
+
+        // Shearing mooshroom
+        if (entity instanceof MooshroomEntity mooshroomEntity) {
+            if (mooshroomEntity.isShearable()) {
+                mooshroomEntity.sheared(SoundCategory.PLAYERS);
+                mooshroomEntity.emitGameEvent(GameEvent.SHEAR, user);
+                stack.damage(1, user, (p) -> p.sendToolBreakStatus(hand));
+                return ActionResult.SUCCESS;
+            }
+        }
+
+        // Shearing snow golem
+        if (entity instanceof SnowGolemEntity snowGolemEntity) {
+            if (snowGolemEntity.isShearable()) {
+                snowGolemEntity.sheared(SoundCategory.PLAYERS);
+                snowGolemEntity.emitGameEvent(GameEvent.SHEAR, user);
+                stack.damage(1, user, (p) -> p.sendToolBreakStatus(hand));
+                return ActionResult.SUCCESS;
             }
         }
         return ActionResult.PASS;
@@ -56,7 +74,6 @@ public class ModShearsItem extends ShearsItem {
                 world.spawnEntity(drop);
             }
         }
-
-        return super.postMine(stack, world, state, pos, miner);
+        return true;
     }
 }
