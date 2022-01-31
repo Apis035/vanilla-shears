@@ -74,6 +74,6 @@ public class ModShearsItem extends ShearsItem {
                 world.spawnEntity(drop);
             }
         }
-        return true;
+        return super.postMine(stack, world, state, pos, miner);
     }
 }
